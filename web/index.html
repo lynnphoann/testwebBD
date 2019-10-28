@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="/eel.js"></script>
+    <title>Home Page</title>
+</head>
+
+<body class="bg-dark">
+
+    <!-- NavBar Start -->
+    <div class="container-fluid bg-dark">
+        <nav class="container navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand text-white" onclick="toggleDiv('home_page')" style="cursor:pointer">Restaurant</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" onclick="toggleDiv('dish_page')" style="cursor:pointer">Dish</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" onclick="toggleDiv('table_page')" style="cursor:pointer">Table</a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </div>
+    <!-- NavBar End  -->
+
+
+    <div class="container mt-5" id="home_page">
+        <div class="col-md-8 offset-md-2 pt-5">
+            <div class="row">
+                <!-- card start -->
+                <div class="col-md-6">
+                    <div class="card rounded-0 bg-success">
+                        <div class="card-body">
+                            <h5 class="card-title text-white">Dish</h5>
+                            <a onclick="toggleDiv('dish_page')" class="btn btn-primary btn-sm float-right">Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- card end -->
+                <!-- card start -->
+                <div class="col-md-6">
+                    <div class="card rounded-0 bg-info">
+                        <div class="card-body">
+                            <h5 class="card-title text-white">Tables</h5>
+                            <a href="#" class="btn btn-primary btn-sm float-right">Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- card end -->
+                <!-- card start -->
+                <div class="col-md-6 mt-5">
+                    <div class="card rounded-0 bg-warning">
+                        <div class="card-body">
+                            <h5 class="card-title">Orders</h5>
+                            <a href="#" class="btn btn-primary btn-sm float-right">Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- card end -->
+                <!-- card start -->
+                <div class="col-md-6 mt-5">
+                    <div class="card rounded-0 bg-danger">
+                        <div class="card-body">
+                            <h5 class="card-title text-white">History</h5>
+                            <a href="#" class="btn btn-outline-primary btn-sm float-right">Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- card end -->
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5" id="dish_page">
+        <!-- Dish Table Start -->
+        <button class="btn btn-primary btn-sm mb-2" onclick="toggleDiv('dish_create_page')">Create</button>
+        <table class="table table-bordered">
+            <thead>
+                <tr class="bg-warning">
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody id="all_dishes_show">
+
+            </tbody>
+        </table>
+        <!-- Dish Table Emd  -->
+    </div>
+
+    <div class="container mt-5" id="dish_edit_page">
+        <!-- dish edit start -->
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-white text-center">Edit Dish Page</h1>
+            <form>
+                <input type="hidden" id="edit_dish_id">
+                <div class="form-group">
+                    <label for="edit_dish_name" class="text-white">Name</label>
+                    <input type="text" class="form-control" id="edit_dish_name">
+                </div>
+                <div class="form-group">
+                    <label for="edit_dish_price" class="text-white">Price</label>
+                    <input type="number" class="form-control" id="edit_dish_price">
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm float-right" onclick="updateDish()">Update</button>
+            </form>
+        </div>
+        <!-- dish edit End  -->
+    </div>
+
+    <div class="container mt-5" id="dish_create_page">
+        <!-- dish Create start -->
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-white text-center">Create Dish Page</h1>
+            <form>
+                <div class="form-group">
+                    <label for="edit_dish_name" class="text-white">Name</label>
+                    <input type="text" class="form-control" id="create_dish_name">
+                </div>
+                <div class="form-group">
+                    <label for="edit_dish_price" class="text-white">Price</label>
+                    <input type="number" class="form-control" id="create_dish_price">
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm float-right" onclick="addDish()">Add</button>
+            </form>
+        </div>
+        <!-- dish Create End  -->
+    </div>
+
+    <div class="container mt-5" id="table_page">
+        <!-- Table ALl Start -->
+        <button class="btn btn-primary btn-sm mb-2" onclick="toggleDiv('create_table')">Create</button>
+        <table class="table table-bordered">
+            <thead>
+                <tr class="bg-warning">
+                    <th scope="col">id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody id="all_table_show">
+                
+            </tbody>
+        </table>
+        <!-- Table ALl End -->
+    </div>
+
+    <div class="container" id="create_table">
+        <!-- Table Create start -->
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-white text-center">Create Table Page</h1>
+            <form>
+                <div class="form-group">
+                    <label for="create_table_name" class="text-white">Name</label>
+                    <input type="text" class="form-control" id="create_table_name">
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm float-right" onclick="createTable()">Create</button>
+            </form>
+        </div>
+        <!-- Table Create End  -->
+    </div>
+
+    <div class="container" id="edit_table">
+        <!-- Table Create start -->
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-white text-center">Edit Table Page</h1>
+            <form>
+                <input type="hidden" id="edit_table_id">
+                <div class="form-group">
+                    <label for="create_table_name" class="text-white">Name</label>
+                    <input type="text" class="form-control" id="edit_table_name">
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm float-right" onclick="updateTable()">Update</button>
+            </form>
+        </div>
+        <!-- Table Create End  -->
+    </div>
+
+    <div class="container" id="order_page">
+        <h1>Order Page</h1>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
